@@ -1,161 +1,186 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* TailWind CSS imports */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-/* Assuming you have a custom color named 'gold' and 'gold-light' in your Tailwind config */
+/* Custom colors configuration for Tailwind */
 .bg-gold {
-  --tw-bg-opacity: 1;
-  background-color: rgba(192, 163, 103, var(--tw-bg-opacity)); /* This is a gold color */
+    --tw-bg-opacity: 1;
+    background-color: rgba(192, 163, 103, var(--tw-bg-opacity)); /* Gold color */
 }
 
 .bg-gold-light {
-  --tw-bg-opacity: 1;
-  background-color: rgba(210, 180, 140, var(--tw-bg-opacity)); /* This is a lighter gold color */
+    --tw-bg-opacity: 1;
+    background-color: rgba(210, 180, 140, var(--tw-bg-opacity)); /* Lighter gold color */
 }
 
 .border-gold {
-  --tw-border-opacity: 1;
-  border-color: rgba(192, 163, 103, var(--tw-border-opacity)); /* This is a gold color */
+    --tw-border-opacity: 1;
+    border-color: rgba(192, 163, 103, var(--tw-border-opacity)); /* Gold border color */
 }
 
-/* App.css */
+/* Reset and base styles */
+body, html {
+    width: 100%;
+    min-height: 100%; /* Ensures full height */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #000; /* Dark background for better contrast */
+    color: white; /* White text for readability */
+    font-family: Arial, sans-serif;
+}
 
+/* Hero section */
 .hero-section {
-  position: relative; /* Needed for absolute positioning of children */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 90vh;
-  background-image: url('./image/bg.jpg'); /* Make sure this path is correct */
-  background-size: cover;
-  background-position: center;
-  color: white;
-  text-align: center;
-  padding: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh;
+    background-image: url('./image/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
 .welcome-text {
-  font-size: 4rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
 }
 
-.contact-info {
-  position: absolute;
-  bottom: 20px; /* Adjust this value to move it up or down */
-  left: 50%; /* Center align the contact info */
-  transform: translateX(-50%); /* Ensure it's perfectly centered regardless of length */
-  font-size: 1.2rem;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Enhances readability */
-  background: none; /* Removes the background */
-  padding: 0; /* Removes padding */
-}
-
-.instagram-icon {
-  color: white;
-  margin-right: 5px;
-}
-
-/* Base and Layout Styles */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #000; /* Ensuring the background doesn't cause visibility issues */
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-footer {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-  padding: 10px;
-  background-color: #000; /* Adjust background color as needed */
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: transparent;
-  padding: 1rem;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1001;
-}
-
-.logo {
-  height: 40px;
-  width: auto;
-}
-
-.hamburger-btn {
-  background: none;
-  border: none;
-  display: block; /* Always display */
-  cursor: pointer;
-  padding: 0;
-}
-
-.menu-items {
-  display: none; /* Hidden by default */
-  width: 100%;
-}
-
-.menu-items.open {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px; /* Add space between menu and button */
-}
-
-.nav-link {
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  text-align: center;
-  display: block;
-}
-
+/* Contact page styling */
 .contact-page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 60px); /* Adjust height taking footer height into account */
-  color: #fff; /* Adjust the color as needed */
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
 }
 
 .opening-soon {
-  font-size: 2rem;
-  margin-bottom: 20px; /* Spacing between the opening soon text and contact info */
+    font-size: 4rem; /* Adjust the size as needed */
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    margin-top: 20px;
+    font-size: 1.2rem; /* Adjust the size as needed */
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
 }
 
 
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000; /* Adjust as needed */
+    position: relative;
+    z-index: 10;
+}
 
+.logo-link .logo {
+    width: 100px; /* Adjust as needed */
+}
+
+/* For mobile view */
+.navbar .hamburger-btn {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 11;
+}
+
+.navbar .menu {
+    display: none;
+}
+
+/* Show menu when open */
+.navbar .menu.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    overflow-y: auto; /* Ensure the menu is scrollable on smaller screens */
+}
+
+/* Nav links in the mobile menu */
+.navbar .menu.open .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    text-align: right; /* Ensure text is aligned to the right */
+}
+
+/* Adjust the position of the first menu item to prevent overlap with the hamburger button */
+.navbar .menu.open .nav-link:first-child {
+    margin-top: 60px; /* Increased margin to prevent overlap */
+}
+
+/* For desktop view */
 @media (min-width: 768px) {
-  .hamburger-btn {
-      display: none; /* Hide on larger screens */
-  }
+    .navbar .hamburger-btn {
+        display: none;
+    }
 
-  .menu-items {
-      display: flex; /* Show as a row on larger screens */
-      justify-content: flex-end;
-      align-items: center;
-      position: absolute;
-      right: 0;
-      top: 0;
-  }
+    .navbar .menu {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        background-color: transparent;
+        padding: 0;
+        transform: none;
+        transition: none;
+    }
+
+    .navbar .menu .nav-link {
+        color: white; /* Adjust color as needed */
+        padding: 0;
+        margin-right: 20px; /* Adjust the value as needed */
+        text-align: center; /* Ensure text is centered */
+        white-space: nowrap; /* Prevent text from breaking into multiple lines */
+    }
+
+    .navbar .menu .nav-link:last-child {
+        margin-right: 0;
+    }
+
+    .navbar .menu {
+        justify-content: flex-end;
+        overflow: hidden; /* Ensure the nav links stay within the container */
+    }
 }
+
+
+
+
+
+
 
 
 

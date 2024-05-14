@@ -10,6 +10,8 @@ import UserDetailsForm from './UserDetailsForm';
 import SummaryForm from './SummaryForm';
 import MenuPage from './MenuPage';
 import ContactInfo from './ContactInfo';
+import './App.css';
+
 
 function App() {
   return (
