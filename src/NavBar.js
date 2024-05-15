@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './image/logo.jpg';  // Ensure the path is correct
+import logo from './image/logo.jpg'; // Ensure the path is correct
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -9,9 +9,13 @@ const NavBar = () => {
         setIsOpen(!isOpen);
     };
 
+    const closeMenu = () => {
+        setIsOpen(false);
+    };
+
     return (
         <nav className="navbar">
-            <Link to="/" className="logo-link">
+            <Link to="/" className="logo-link" onClick={closeMenu}>
                 <img src={logo} alt="Logo" className="logo" />
             </Link>
             <button onClick={toggleMenu} className="hamburger-btn" aria-label="Toggle menu">
@@ -23,16 +27,17 @@ const NavBar = () => {
                 </svg>
             </button>
             <div className={`menu ${isOpen ? 'open' : 'closed'}`}>
-                <Link to="/#about" className="nav-link">About</Link>
-                <Link to="/menu" className="nav-link">Menu</Link>
-                <Link to="/#reservation" className="nav-link">Reservation</Link>
-                <Link to="/contact" className="nav-link">Contact</Link>
+                <Link to="/#about" className="nav-link" onClick={closeMenu}>About</Link>
+                <Link to="/menu" className="nav-link" onClick={closeMenu}>Menu</Link>
+                <Link to="/#reservation" className="nav-link" onClick={closeMenu}>Reservation</Link>
+                <Link to="/contact" className="nav-link" onClick={closeMenu}>Contact</Link>
             </div>
         </nav>
     );
 };
 
 export default NavBar;
+
 
 
 

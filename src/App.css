@@ -38,9 +38,10 @@ body, html {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 90vh;
+    height: 80vh; /* Reduce the height to show more of the image */
     background-image: url('./image/bg.jpg');
-    background-size: cover;
+    background-size: contain; /* Ensure the entire image is visible */
+    background-repeat: no-repeat;
     background-position: center;
     color: white;
     text-align: center;
@@ -53,38 +54,10 @@ body, html {
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
 }
 
-/* Contact page styling */
-.contact-page-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #000;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-}
-
-.opening-soon {
-    font-size: 4rem; /* Adjust the size as needed */
-    margin-bottom: 20px;
-}
-
 .contact-info {
-    margin-top: 20px;
-    font-size: 1.2rem; /* Adjust the size as needed */
-}
-
-.footer {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
+    bottom: 20px;
 }
-
 
 /* Navbar styling */
 .navbar {
@@ -93,7 +66,9 @@ body, html {
     align-items: center;
     padding: 10px 20px;
     background-color: #000; /* Adjust as needed */
-    position: relative;
+    position: fixed; /* Make navbar fixed */
+    top: 0;
+    width: 100%;
     z-index: 10;
 }
 
@@ -122,7 +97,7 @@ body, html {
     top: 0;
     right: 0;
     height: 100%;
-    width: 250px;
+    width: 125px; /* Reduce the width to half */
     background-color: rgba(0, 0, 0, 0.9);
     padding: 20px;
     overflow-y: auto; /* Ensure the menu is scrollable on smaller screens */
@@ -161,7 +136,8 @@ body, html {
     .navbar .menu .nav-link {
         color: white; /* Adjust color as needed */
         padding: 0;
-        margin-right: 20px; /* Adjust the value as needed */
+        margin-right: 30px; /* Adjust the value as needed */
+        font-size: 1.2rem; /* Increase font size */
         text-align: center; /* Ensure text is centered */
         white-space: nowrap; /* Prevent text from breaking into multiple lines */
     }
@@ -174,6 +150,49 @@ body, html {
         justify-content: flex-end;
         overflow: hidden; /* Ensure the nav links stay within the container */
     }
+
+    .logo-link .logo {
+        width: 150px; /* Increase the logo size */
+    }
+}
+
+/* Ensure hamburger button stays in the top right corner */
+.hamburger-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+/* Contact page styling */
+.contact-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.opening-soon {
+    font-size: 4rem; /* Adjust the size as needed */
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    margin-top: 20px;
+    font-size: 1.2rem; /* Adjust the size as needed */
+}
+
+.footer {
+    position: fixed; /* Change to fixed */
+    bottom: 0; /* Align to bottom */
+    width: 100%; /* Full width */
+    text-align: center;
+    padding: 10px;
 }
 
 
