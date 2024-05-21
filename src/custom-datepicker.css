@@ -1,0 +1,133 @@
+/* custom-datepicker.css */
+
+/* Ensure the calendar is correctly contained */
+.react-datepicker {
+    width: 100%;
+    max-width: 500px; /* Increase max-width to enlarge the calendar */
+    margin: 0 auto;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Header styles */
+.react-datepicker__header {
+    background-color: black;
+    border-bottom: 1px solid white;
+    padding: 8px 0;
+}
+
+/* Title (Month and Year) styles */
+.react-datepicker__current-month {
+    color: white; /* Set the month and year text color to white */
+    font-size: 1.4rem; /* Adjust font size if needed */
+    margin-bottom: 10px; /* Add margin to ensure proper spacing */
+}
+
+/* Navigation styles */
+.react-datepicker__navigation {
+    top: 10px;
+    line-height: 1.5rem; /* Adjust the line-height if needed */
+    border: 0.6rem solid transparent; /* Further reduce the size of the arrow */
+    width: 0;
+    height: 0;
+}
+
+.react-datepicker__navigation--previous {
+    border-right-color: white;
+    left: 10px;
+}
+
+.react-datepicker__navigation--next {
+    border-left-color: white;
+    right: 10px;
+}
+
+/* Styles for the days of the week */
+.react-datepicker__day-name {
+    color: white;
+    margin: 0.2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem; /* Increase width to accommodate larger font size */
+    line-height: 2.8rem;
+    font-size: 1.2rem; /* Increase font size */
+}
+
+/* Styles for the days */
+.react-datepicker__day, 
+.react-datepicker__day--selected, 
+.react-datepicker__day--keyboard-selected {
+    width: 3.5rem; /* Increase width to accommodate larger font size */
+    line-height: 2.8rem;
+    margin: 0.2rem;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 1.2rem; /* Increase font size */
+}
+
+.react-datepicker__day:hover {
+    background-color: gray;
+}
+
+/* Styles for the selected day */
+.react-datepicker__day--selected, 
+.react-datepicker__day--keyboard-selected {
+    background-color: white;
+    color: black;
+}
+
+/* Styles for Sundays */
+.react-datepicker__day--sunday {
+    color: red;
+    position: relative; /* Ensure the tooltip is positioned correctly */
+}
+
+/* Disabled days */
+.react-datepicker__day--disabled {
+    color: grey;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Inline date picker */
+.react-datepicker__month-container {
+    background-color: black;
+}
+
+.react-datepicker__day--outside-month {
+    background-color: black;
+    color: white;
+    opacity: 0.3;
+}
+
+/* Tooltip styles */
+.tooltip::after {
+    content: "Close On Sunday";
+    position: absolute;
+    bottom: -1.5rem; /* Adjust based on the tooltip position */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    display: none;
+}
+
+.tooltip:hover::after {
+    display: block;
+}
+
+
+  
+  
+  
+  

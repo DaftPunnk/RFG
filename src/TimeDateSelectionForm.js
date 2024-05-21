@@ -3,6 +3,7 @@ import { useReservation } from './ReservationContext';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
+import './custom-datepicker.css';  // 保留当前的样式
 import moment from 'moment';
 
 function TimeDateSelectionForm({ nextStep, prevStep }) {
@@ -10,16 +11,28 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
   const [availableTimes, setAvailableTimes] = useState([]);
   const [selectedTime, setSelectedTime] = useState(reservation.time);
   const [seatAvailability, setSeatAvailability] = useState({});
+  const [errors, setErrors] = useState({});
+  const [fullyBooked, setFullyBooked] = useState(false);
+  const [maxGuests, setMaxGuests] = useState(8); // 新增状态来设置最大人数
 
   useEffect(() => {
     const times = reservation.mealType === 'lunch' ? ['12:00', '13:00'] : ['18:00', '19:00'];
     setAvailableTimes(times);
-    
+
     const fetchSeatAvailability = async (selectedDate) => {
       try {
         const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
         const response = await axios.get(`http://localhost:3001/api/seat-availability/${formattedDate}`);
-        setSeatAvailability(response.data); // Assuming response.data is an object like {'12:00': 6, '13:00': 8}
+        setSeatAvailability(response.data);
+        // Check if all time slots are fully booked
+        const allFull = times.every(time => response.data[time] === 0);
+        setFullyBooked(allFull);
+        // 设置最大人数为初始值
+        if (response.data[reservation.time] !== undefined) {
+          setMaxGuests(response.data[reservation.time]); // 根据当前选择的时间段设置最大人数
+        } else {
+          setMaxGuests(8); // 重置最大人数为初始值
+        }
       } catch (error) {
         console.error('Error fetching seat availability:', error);
       }
@@ -28,70 +41,156 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
     if (reservation.date) {
       fetchSeatAvailability(reservation.date);
     }
-  }, [reservation.date, reservation.mealType]);
+  }, [reservation.date, reservation.mealType, reservation.time]);
 
   const handleTimeSelection = (time) => {
     setSelectedTime(time);
     updateReservation({ ...reservation, time: time });
+    setErrors((prevErrors) => ({ ...prevErrors, time: '' }));
+    if (seatAvailability[time] !== undefined) {
+      setMaxGuests(seatAvailability[time]);
+      if (reservation.guests > seatAvailability[time]) {
+        updateReservation({ ...reservation, guests: seatAvailability[time] }); // 如果当前人数超过最大值，调整人数
+      }
+    } else {
+      setMaxGuests(8); // 重置最大人数为初始值
+    }
+  };
+
+  const handleDateChange = (date) => {
+    updateReservation({ ...reservation, date, guests: 1 }); // 选择新日期时，将人数重置为1
+    setErrors((prevErrors) => ({ ...prevErrors, date: '' }));
+  };
+
+  const handleGuestChange = (amount) => {
+    if (amount >= 1 && amount <= maxGuests) {
+      updateReservation({ ...reservation, guests: amount });
+      setErrors((prevErrors) => ({ ...prevErrors, guests: '' }));
+    }
+  };
+
+  const handleSubmit = () => {
+    const newErrors = {};
+
+    if (!reservation.date) newErrors.date = 'Date is required';
+    if (!reservation.time) newErrors.time = 'Time is required';
+    if (!reservation.guests) newErrors.guests = 'Number of guests is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    nextStep();
+  };
+
+  const getDayClassName = (date) => {
+    return date.getDay() === 0 ? 'react-datepicker__day--sunday tooltip' : '';
+  };
+
+  const isDayDisabled = (date) => {
+    return date.getDay() === 0;
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-white rounded shadow">
-      <DatePicker
-        selected={reservation.date}
-        onChange={(date) => updateReservation({ ...reservation, date })}
-        minDate={new Date()}
-        filterDate={(date) => date.getDay() !== 0} // Disables Sundays
-        inline
-        className="mb-4"
-      />
-      <div className="flex justify-center my-4">
-        {availableTimes.map((time) => (
+    <div className="flex items-center justify-center min-h-screen bg-black text-white">
+      <div className="flex flex-col items-center justify-center p-6 bg-black rounded shadow border border-white max-w-lg w-full">
+        <DatePicker
+          selected={reservation.date}
+          onChange={handleDateChange}
+          minDate={new Date()}
+          dayClassName={getDayClassName}
+          filterDate={(date) => !isDayDisabled(date)}
+          inline
+          className="mb-4 text-black react-datepicker"
+        />
+        {errors.date && <div className="text-red-500 text-sm mb-2">{errors.date}</div>}
+        <div className="flex justify-center my-4">
+          {availableTimes.map((time) => (
+            <button
+              key={time}
+              className={`px-5 py-3 rounded mx-2 ${selectedTime === time ? 'bg-white text-black border-black' : 'bg-black hover:bg-gray-800 text-white border-white'} border ${seatAvailability[time] === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={() => handleTimeSelection(time)}
+              disabled={seatAvailability[time] === 0}
+              title={`${time} - ${seatAvailability[time] !== undefined ? seatAvailability[time] : 8} seats available`}
+            >
+              {time}
+            </button>
+          ))}
+        </div>
+        {fullyBooked && <div className="text-red-500 text-sm mb-2">All time slots are fully booked for this date. Please select another date.</div>}
+        {errors.time && <div className="text-red-500 text-sm mb-2">{errors.time}</div>}
+        <div className="flex items-center justify-center my-4">
           <button
-            key={time}
-            className={`px-4 py-2 rounded mx-1 ${selectedTime === time ? 'bg-red-500' : 'bg-blue-500 hover:bg-blue-600'} text-white ${seatAvailability[time] === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-            onClick={() => handleTimeSelection(time)}
-            disabled={seatAvailability[time] === 0}
-            title={`${time} - ${seatAvailability[time] || 0} seats available`}
+            className="bg-black text-white border border-white rounded px-5 py-3 mx-2 hover:bg-gray-800"
+            onClick={() => handleGuestChange(reservation.guests - 1)}
+            disabled={reservation.guests <= 1}
           >
-            {time}
+            -
           </button>
-        ))}
-      </div>
-      <div className="flex items-center justify-center my-4">
-        <button
-          className="bg-red-400 text-white rounded px-4 py-2 mx-1 hover:bg-red-500"
-          onClick={() => updateReservation({ ...reservation, guests: Math.max(1, reservation.guests - 1) })}
-        >
-          -
-        </button>
-        <span className="text-xl mx-2">{reservation.guests} Guests</span>
-        <button
-          className="bg-green-400 text-white rounded px-4 py-2 mx-1 hover:bg-green-500"
-          onClick={() => updateReservation({ ...reservation, guests: Math.min(8, reservation.guests + 1) })}
-        >
-          +
-        </button>
-      </div>
-      <div className="flex justify-between w-full mt-4">
-        <button
-          className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
-          onClick={prevStep}
-        >
-          Back
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          onClick={nextStep}
-        >
-          Next
-        </button>
+          <span className="text-2xl mx-4">
+            {reservation.guests} {reservation.guests === 1 ? 'Guest' : 'Guests'}
+          </span>
+          <button
+            className="bg-black text-white border border-white rounded px-5 py-3 mx-2 hover:bg-gray-800"
+            onClick={() => handleGuestChange(reservation.guests + 1)}
+            disabled={reservation.guests >= maxGuests}
+          >
+            +
+          </button>
+        </div>
+        {errors.guests && <div className="text-red-500 text-sm mb-2">{errors.guests}</div>}
+        <div className="flex items-center justify-center mt-4 space-x-4">
+          <button
+            className="bg-black text-white border border-white hover:bg-gray-800 font-bold py-3 px-6 rounded"
+            onClick={prevStep}
+          >
+            Back
+          </button>
+          <button
+            className="bg-black text-white border border-white hover:bg-gray-800 font-bold py-3 px-6 rounded"
+            onClick={handleSubmit}
+            disabled={fullyBooked}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default TimeDateSelectionForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

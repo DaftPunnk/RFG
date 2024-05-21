@@ -1,44 +1,64 @@
-import React from 'react';
-import axios from 'axios'; // Ensure you've installed axios with npm install axios
+import React, { useState } from 'react';
+import { useReservation } from './ReservationContext';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
 
-function SummaryForm({ reservation, prevStep }) {
-  const handleSubmit = async () => {
+function SummaryForm({ prevStep }) {
+  const { reservation } = useReservation();
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+
+  const handleConfirm = async () => {
     try {
-        await axios.post('http://localhost:3001/api/reservations', reservation);
-        alert('Booking Confitmed!'); // Alert the success message
+      await axios.post('http://localhost:3001/api/reservations', reservation);
+      navigate('/thank-you');
     } catch (error) {
-        console.error('There was an error saving the reservation', error);
-        alert('There was an error saving the reservation.');
+      console.error('Error confirming booking:', error);
+      setErrors({ confirm: 'Error confirming booking. Please try again.' });
     }
-};
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">Reservation Summary</h2>
-      <div className="mb-2"><strong>Meal:</strong> {reservation.mealType}</div>
-      <div className="mb-2"><strong>Date:</strong> {reservation.date.toLocaleDateString()}</div>
-      <div className="mb-2"><strong>Time:</strong> {reservation.time}</div>
-      <div className="mb-2"><strong>Guests:</strong> {reservation.guests}</div>
-      <div className="mb-2"><strong>Name:</strong> {reservation.name}</div>
-      <div className="mb-2"><strong>Phone:</strong> {reservation.phone}</div>
-      <div className="mb-2"><strong>Email:</strong> {reservation.email}</div>
-      <div className="flex justify-between w-full mt-4">
-        <button
-          className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
-          onClick={prevStep}
-        >
-          Back
-        </button>
-        <button
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-          onClick={handleSubmit}
-        >
-          Confirm Booking
-        </button>
+    <div className="flex items-center justify-center min-h-screen bg-black text-white">
+      <div className="flex flex-col items-center justify-center p-6 bg-black rounded shadow border border-white max-w-lg w-full">
+        <h1 className="text-4xl font-bold mb-4">Reservation Summary</h1>
+        <ul className="text-lg mb-4">
+          <li><strong>Meal:</strong> {reservation.mealType}</li>
+          <li><strong>Date:</strong> {moment(reservation.date).format('ddd MMM DD YYYY')}</li>
+          <li><strong>Time:</strong> {reservation.time}</li>
+          <li><strong>Guests:</strong> {reservation.guests}</li>
+          <li><strong>Name:</strong> {reservation.name}</li>
+          <li><strong>Phone:</strong> {reservation.phone}</li>
+          <li><strong>Email:</strong> {reservation.email}</li>
+        </ul>
+        {errors.confirm && <div className="text-red-500 text-sm mb-2">{errors.confirm}</div>}
+        <div className="flex items-center justify-center mt-4 space-x-4">
+          <button
+            className="bg-white text-black border border-white hover:bg-gray-800 hover:text-white font-bold py-3 px-6 rounded"
+            onClick={prevStep}
+          >
+            Back
+          </button>
+          <button
+            className="bg-green-500 text-white border border-white hover:bg-green-700 font-bold py-3 px-6 rounded"
+            onClick={handleConfirm}
+          >
+            Confirm Booking
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default SummaryForm;
+
+
+
+
+
+
+
+
 

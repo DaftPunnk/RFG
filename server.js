@@ -28,15 +28,28 @@ db.connect((err) => {
 });
 
 app.post('/api/reservations', (req, res) => {
-    // ... reservation submission endpoint as before ...
+    const { mealType, date, time, guests, name, phone, email } = req.body;
+
+    const formattedDate = moment(date).format('YYYY-MM-DD');
+    const query = `
+        INSERT INTO reservations (meal_type, date, time, guests, name, phone, email)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    db.query(query, [mealType, formattedDate, time, guests, name, phone, email], (err, result) => {
+        if (err) {
+            console.error('Error saving reservation:', err);
+            res.status(500).send({ message: 'Error saving reservation' });
+            return;
+        }
+        res.status(200).send({ message: 'Reservation saved successfully' });
+    });
 });
 
-// Enhanced Endpoint to fetch the seat availability for a specific date 
 app.get('/api/seat-availability/:date', (req, res) => {
     const selectedDate = req.params.date;
     console.log(`Fetching seat availability for date: ${selectedDate}`);
 
-    // Make sure this query matches the date and time format in the database
     const availabilityQuery = `
         SELECT time, SUM(guests) AS booked_seats
         FROM reservations
@@ -52,20 +65,16 @@ app.get('/api/seat-availability/:date', (req, res) => {
         }
         console.log('Results from database:', results);
 
-        // Initialize seat availability with all time slots defaulted to max seats
         const allTimeSlots = ['12:00', '13:00', '18:00', '19:00'];
         const seatAvailability = allTimeSlots.reduce((acc, time) => {
-            acc[time] = 8; // Default to max seats
+            acc[time] = 8; // Initialize with total seats available
             return acc;
         }, {});
 
-        // Update the seat availability based on the query results
         results.forEach(slot => {
-            // Format the time from the database to match the time slots
             const timeFormatted = moment(slot.time, 'HH:mm:ss').format('HH:mm');
-            // Make sure to check if the formatted time is within the allTimeSlots
             if (allTimeSlots.includes(timeFormatted)) {
-                seatAvailability[timeFormatted] = Math.max(0, 8 - slot.booked_seats);
+                seatAvailability[timeFormatted] -= slot.booked_seats; // Subtract booked seats from total seats
             }
         });
 
@@ -74,9 +83,9 @@ app.get('/api/seat-availability/:date', (req, res) => {
     });
 });
 
-
-// ... Rest of your code for other endpoints ...
-
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
+
+
+

@@ -4,28 +4,23 @@ import { ReservationProvider } from './ReservationContext';
 import NavBar from './NavBar';
 import HeroSection from './HeroSection';
 import Footer from './Footer';
-import MealSelectionForm from './MealSelectionForm';
-import TimeDateSelectionForm from './TimeDateSelectionForm';
-import UserDetailsForm from './UserDetailsForm';
-import SummaryForm from './SummaryForm';
+import ReservationManager from './ReservationManager';
 import MenuPage from './MenuPage';
 import ContactInfo from './ContactInfo';
+import ThankYou from './ThankYou'; // 导入 ThankYou 组件
 import './App.css';
-
 
 function App() {
   return (
     <Router>
-      <ReservationProvider> 
+      <ReservationProvider>
         <NavBar />
         <Routes>
           <Route path="/" element={<HeroSection />} />
           <Route path="/menu" element={<MenuPage />} />
-          <Route path="/reservation" element={<MealSelectionForm />} />
-          <Route path="/reservation/date-time" element={<TimeDateSelectionForm />} />
-          <Route path="/reservation/details" element={<UserDetailsForm />} />
-          <Route path="/reservation/summary" element={<SummaryForm />} />
+          <Route path="/reservation" element={<ReservationManager />} />
           <Route path="/contact" element={<ContactInfo />} />
+          <Route path="/thank-you" element={<ThankYou />} /> {/* 新增的 ThankYou 路由 */}
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
         <Footer />
@@ -35,6 +30,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

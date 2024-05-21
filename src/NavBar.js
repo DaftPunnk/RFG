@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import logo from './image/logo.jpg'; // Ensure the path is correct
+import { Link, useNavigate } from 'react-router-dom';
+import { useReservation } from './ReservationContext';
+import logo from './image/logo.png'; // 确保路径正确
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const { updateReservation } = useReservation();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -11,6 +14,20 @@ const NavBar = () => {
 
     const closeMenu = () => {
         setIsOpen(false);
+    };
+
+    const handleReservationClick = () => {
+        updateReservation({
+            mealType: '',
+            date: null,
+            time: '',
+            guests: 1,
+            name: '',
+            phone: '',
+            email: ''
+        });
+        closeMenu();
+        navigate('/reservation');
     };
 
     return (
@@ -29,7 +46,7 @@ const NavBar = () => {
             <div className={`menu ${isOpen ? 'open' : 'closed'}`}>
                 <Link to="/#about" className="nav-link" onClick={closeMenu}>About</Link>
                 <Link to="/menu" className="nav-link" onClick={closeMenu}>Menu</Link>
-                <Link to="/#reservation" className="nav-link" onClick={closeMenu}>Reservation</Link>
+                <Link to="/reservation" className="nav-link" onClick={handleReservationClick}>Reservation</Link>
                 <Link to="/contact" className="nav-link" onClick={closeMenu}>Contact</Link>
             </div>
         </nav>
@@ -37,6 +54,15 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+
+
+
+
+
+
+
+
 
 
 
