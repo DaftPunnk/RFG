@@ -14,6 +14,7 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
   const [errors, setErrors] = useState({});
   const [fullyBooked, setFullyBooked] = useState(false);
   const [maxGuests, setMaxGuests] = useState(8); // 新增状态来设置最大人数
+  const [showAvailability, setShowAvailability] = useState(null);
 
   useEffect(() => {
     const times = reservation.mealType === 'lunch' ? ['12:00', '13:00'] : ['18:00', '19:00'];
@@ -47,6 +48,7 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
     setSelectedTime(time);
     updateReservation({ ...reservation, time: time });
     setErrors((prevErrors) => ({ ...prevErrors, time: '' }));
+    setShowAvailability(time); // 只显示选中的时间段
     if (seatAvailability[time] !== undefined) {
       setMaxGuests(seatAvailability[time]);
       if (reservation.guests > seatAvailability[time]) {
@@ -107,15 +109,20 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
         {errors.date && <div className="text-red-500 text-sm mb-2">{errors.date}</div>}
         <div className="flex justify-center my-4">
           {availableTimes.map((time) => (
-            <button
-              key={time}
-              className={`px-5 py-3 rounded mx-2 ${selectedTime === time ? 'bg-white text-black border-black' : 'bg-black hover:bg-gray-800 text-white border-white'} border ${seatAvailability[time] === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-              onClick={() => handleTimeSelection(time)}
-              disabled={seatAvailability[time] === 0}
-              title={`${time} - ${seatAvailability[time] !== undefined ? seatAvailability[time] : 8} seats available`}
-            >
-              {time}
-            </button>
+            <div key={time} className="flex flex-col items-center">
+              <button
+                className={`px-5 py-3 rounded mx-2 ${selectedTime === time ? 'bg-white text-black border-black' : 'bg-black hover:bg-gray-800 text-white border-white'} border ${seatAvailability[time] === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={() => handleTimeSelection(time)}
+                disabled={seatAvailability[time] === 0}
+              >
+                {time}
+              </button>
+              {showAvailability === time && (
+                <div className="text-white mt-2">
+                  {seatAvailability[time] !== undefined ? `${seatAvailability[time]} seats available` : '8 seats available'}
+                </div>
+              )}
+            </div>
           ))}
         </div>
         {fullyBooked && <div className="text-red-500 text-sm mb-2">All time slots are fully booked for this date. Please select another date.</div>}
@@ -161,6 +168,28 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
 }
 
 export default TimeDateSelectionForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

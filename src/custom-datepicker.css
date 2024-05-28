@@ -1,3 +1,6 @@
+/* 引入 Suranna 字体 */
+@import url('https://fonts.googleapis.com/css2?family=Suranna&display=swap');
+
 /* custom-datepicker.css */
 
 /* Ensure the calendar is correctly contained */
@@ -9,6 +12,7 @@
     background-color: black;
     color: white;
     border-radius: 5px;
+    font-family: 'Suranna', serif; /* 应用 Suranna 字体 */
 }
 
 /* Header styles */
@@ -16,6 +20,7 @@
     background-color: black;
     border-bottom: 1px solid white;
     padding: 8px 0;
+    font-family: 'Suranna', serif; /* 应用 Suranna 字体 */
 }
 
 /* Title (Month and Year) styles */
@@ -23,6 +28,7 @@
     color: white; /* Set the month and year text color to white */
     font-size: 1.4rem; /* Adjust font size if needed */
     margin-bottom: 10px; /* Add margin to ensure proper spacing */
+    font-family: 'Suranna', serif; /* 应用 Suranna 字体 */
 }
 
 /* Navigation styles */
@@ -54,6 +60,7 @@
     width: 3.5rem; /* Increase width to accommodate larger font size */
     line-height: 2.8rem;
     font-size: 1.2rem; /* Increase font size */
+    font-family: 'Suranna', serif; /* 应用 Suranna 字体 */
 }
 
 /* Styles for the days */
@@ -69,6 +76,7 @@
     align-items: center;
     border-radius: 5px;
     font-size: 1.2rem; /* Increase font size */
+    font-family: 'Suranna', serif; /* 应用 Suranna 字体 */
 }
 
 .react-datepicker__day:hover {
@@ -120,6 +128,7 @@
     font-size: 0.8rem;
     white-space: nowrap;
     display: none;
+    font-family: 'Suranna', serif; /* 应用 Suranna 字体 */
 }
 
 .tooltip:hover::after {

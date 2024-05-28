@@ -24,7 +24,7 @@ function SummaryForm({ prevStep }) {
       <div className="flex flex-col items-center justify-center p-6 bg-black rounded shadow border border-white max-w-lg w-full">
         <h1 className="text-4xl font-bold mb-4">Reservation Summary</h1>
         <ul className="text-lg mb-4">
-          <li><strong>Meal:</strong> {reservation.mealType}</li>
+          <li><strong>Meal:</strong> {reservation.mealType.charAt(0).toUpperCase() + reservation.mealType.slice(1)}</li>
           <li><strong>Date:</strong> {moment(reservation.date).format('ddd MMM DD YYYY')}</li>
           <li><strong>Time:</strong> {reservation.time}</li>
           <li><strong>Guests:</strong> {reservation.guests}</li>
@@ -53,6 +53,7 @@ function SummaryForm({ prevStep }) {
 }
 
 export default SummaryForm;
+
 
 
 

@@ -1,7 +1,22 @@
+/* 引入 Suranna 字体 */
+@import url('https://fonts.googleapis.com/css2?family=Suranna&display=swap');
+
 /* TailWind CSS imports */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* 全局字体设置 */
+body, html {
+    font-family: 'Suranna', serif;
+    width: 100%;
+    min-height: 100%; /* Ensures full height */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #000; /* Dark background for better contrast */
+    color: white; /* White text for readability */
+}
 
 /* Custom colors configuration for Tailwind */
 .bg-gold {
@@ -17,18 +32,6 @@
 .border-gold {
     --tw-border-opacity: 1;
     border-color: rgba(192, 163, 103, var(--tw-border-opacity)); /* Gold border color */
-}
-
-/* Reset and base styles */
-body, html {
-    width: 100%;
-    min-height: 100%; /* Ensures full height */
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background: #000; /* Dark background for better contrast */
-    color: white; /* White text for readability */
-    font-family: Arial, sans-serif;
 }
 
 /* Hero section */
