@@ -1,6 +1,9 @@
 /* 引入 Suranna 字体 */
 @import url('https://fonts.googleapis.com/css2?family=Suranna&display=swap');
 
+/* Font Awesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
 /* TailWind CSS imports */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -170,33 +173,85 @@ body, html {
 .contact-page-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #000;
+    justify-content: space-between;
+    min-height: 100vh;
     color: white;
     text-align: center;
     padding: 20px;
     position: relative;
 }
 
-.opening-soon {
-    font-size: 4rem; /* Adjust the size as needed */
-    margin-bottom: 20px;
+.contact-image-section {
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-.contact-info {
-    margin-top: 20px;
-    font-size: 1.2rem; /* Adjust the size as needed */
+.contact-title {
+    font-size: 4em;
+    margin-top: 100px; /* Move the title down */
+}
+
+.contact-details-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    width: 100%;
+    margin-top: -100px; /* Move the sections up */
+}
+
+.left-section {
+    text-align: left;
+    width: 50%;
+    font-size: 1.5em; /* Increase font size */
+}
+
+.right-section {
+    text-align: right;
+    width: 50%;
+    font-size: 1.5em; /* Increase font size */
+}
+
+.get-in-touch {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.contact-us {
+    font-size: 1.2em;
+    margin-top: -10px;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+.contact-icon {
+    margin-right: 10px;
+    font-size: 1.5em; /* Adjust icon size */
 }
 
 .footer {
-    position: fixed; /* Change to fixed */
-    bottom: 0; /* Align to bottom */
     width: 100%; /* Full width */
     text-align: center;
     padding: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
