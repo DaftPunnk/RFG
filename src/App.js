@@ -7,7 +7,8 @@ import Footer from './Footer';
 import ReservationManager from './ReservationManager';
 import MenuPage from './MenuPage';
 import ContactInfo from './ContactInfo';
-import ThankYou from './ThankYou'; // 导入 ThankYou 组件
+import ThankYou from './ThankYou'; // Import ThankYou component
+import AboutPage from './AboutPage'; // Import AboutPage component
 import './App.css';
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/reservation" element={<ReservationManager />} />
           <Route path="/contact" element={<ContactInfo />} />
-          <Route path="/thank-you" element={<ThankYou />} /> {/* 新增的 ThankYou 路由 */}
+          <Route path="/about" element={<AboutPage />} /> {/* Add route for AboutPage */}
+          <Route path="/thank-you" element={<ThankYou />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
         <Footer />
@@ -30,6 +32,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

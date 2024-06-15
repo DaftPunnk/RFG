@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useReservation } from './ReservationContext';
-import logo from './image/logo.png'; // 确保路径正确
+import logo from './image/logo.png';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -44,9 +44,9 @@ const NavBar = () => {
                 </svg>
             </button>
             <div className={`menu ${isOpen ? 'open' : 'closed'}`}>
-                <Link to="/#about" className="nav-link" onClick={closeMenu}>About</Link>
+                <Link to="/about" className="nav-link" onClick={closeMenu}>About</Link> {/* Update link to /about */}
                 <Link to="/menu" className="nav-link" onClick={closeMenu}>Menu</Link>
-                <Link to="/reservation" className="nav-link" onClick={handleReservationClick}>Reservation</Link>
+                <Link to="/#reservation" className="nav-link" onClick={handleReservationClick}>Reservation</Link>
                 <Link to="/contact" className="nav-link" onClick={closeMenu}>Contact</Link>
             </div>
         </nav>
@@ -54,6 +54,7 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
 
 
 

@@ -1,40 +1,34 @@
-/* 引入 Suranna 字体 */
+/* Importing fonts and base styles */
 @import url('https://fonts.googleapis.com/css2?family=Suranna&display=swap');
-
-/* Font Awesome */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
-
-/* TailWind CSS imports */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* 全局字体设置 */
+/* Global settings */
 body, html {
     font-family: 'Suranna', serif;
     width: 100%;
-    min-height: 100%; /* Ensures full height */
+    min-height: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background: #000; /* Dark background for better contrast */
-    color: white; /* White text for readability */
+    background: #000;
+    color: white;
 }
 
-/* Custom colors configuration for Tailwind */
+/* Custom colors */
 .bg-gold {
     --tw-bg-opacity: 1;
-    background-color: rgba(192, 163, 103, var(--tw-bg-opacity)); /* Gold color */
+    background-color: rgba(192, 163, 103, var(--tw-bg-opacity));
 }
-
 .bg-gold-light {
     --tw-bg-opacity: 1;
-    background-color: rgba(210, 180, 140, var(--tw-bg-opacity)); /* Lighter gold color */
+    background-color: rgba(210, 180, 140, var(--tw-bg-opacity));
 }
-
 .border-gold {
     --tw-border-opacity: 1;
-    border-color: rgba(192, 163, 103, var(--tw-border-opacity)); /* Gold border color */
+    border-color: rgba(192, 163, 103, var(--tw-border-opacity));
 }
 
 /* Hero section */
@@ -44,9 +38,9 @@ body, html {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 80vh; /* Reduce the height to show more of the image */
+    height: 80vh;
     background-image: url('./image/bg.jpg');
-    background-size: contain; /* Ensure the entire image is visible */
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     color: white;
@@ -71,18 +65,17 @@ body, html {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #000; /* Adjust as needed */
-    position: fixed; /* Make navbar fixed */
+    background-color: #000;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
 }
 
 .logo-link .logo {
-    width: 100px; /* Adjust as needed */
+    width: 100px;
 }
 
-/* For mobile view */
 .navbar .hamburger-btn {
     display: block;
     background: none;
@@ -103,23 +96,21 @@ body, html {
     top: 0;
     right: 0;
     height: 100%;
-    width: 125px; /* Reduce the width to half */
+    width: 125px;
     background-color: rgba(0, 0, 0, 0.9);
     padding: 20px;
-    overflow-y: auto; /* Ensure the menu is scrollable on smaller screens */
+    overflow-y: auto;
 }
 
-/* Nav links in the mobile menu */
 .navbar .menu.open .nav-link {
     color: white;
     text-decoration: none;
     padding: 10px 0;
-    text-align: right; /* Ensure text is aligned to the right */
+    text-align: right;
 }
 
-/* Adjust the position of the first menu item to prevent overlap with the hamburger button */
 .navbar .menu.open .nav-link:first-child {
-    margin-top: 60px; /* Increased margin to prevent overlap */
+    margin-top: 60px;
 }
 
 /* For desktop view */
@@ -140,12 +131,12 @@ body, html {
     }
 
     .navbar .menu .nav-link {
-        color: white; /* Adjust color as needed */
+        color: white;
         padding: 0;
-        margin-right: 30px; /* Adjust the value as needed */
-        font-size: 1.2rem; /* Increase font size */
-        text-align: center; /* Ensure text is centered */
-        white-space: nowrap; /* Prevent text from breaking into multiple lines */
+        margin-right: 30px;
+        font-size: 1.2rem;
+        text-align: center;
+        white-space: nowrap;
     }
 
     .navbar .menu .nav-link:last-child {
@@ -154,11 +145,11 @@ body, html {
 
     .navbar .menu {
         justify-content: flex-end;
-        overflow: hidden; /* Ensure the nav links stay within the container */
+        overflow: hidden;
     }
 
     .logo-link .logo {
-        width: 150px; /* Increase the logo size */
+        width: 150px;
     }
 }
 
@@ -193,7 +184,7 @@ body, html {
 
 .contact-title {
     font-size: 4em;
-    margin-top: 100px; /* Move the title down */
+    margin-top: 100px;
 }
 
 .contact-details-section {
@@ -201,19 +192,19 @@ body, html {
     justify-content: space-between;
     padding: 0 20px;
     width: 100%;
-    margin-top: -100px; /* Move the sections up */
+    margin-top: -100px;
 }
 
 .left-section {
     text-align: left;
     width: 50%;
-    font-size: 1.5em; /* Increase font size */
+    font-size: 1.5em;
 }
 
 .right-section {
     text-align: right;
     width: 50%;
-    font-size: 1.5em; /* Increase font size */
+    font-size: 1.5em;
 }
 
 .get-in-touch {
@@ -228,18 +219,190 @@ body, html {
 
 .contact-info p {
     margin: 10px 0;
+    display: block;
 }
 
 .contact-icon {
     margin-right: 10px;
-    font-size: 1.5em; /* Adjust icon size */
+    font-size: 1.5em;
 }
 
 .footer {
-    width: 100%; /* Full width */
+    width: 100%;
     text-align: center;
     padding: 10px;
 }
+/* Add these styles to your App.css file */
+
+.about-page-container {
+    padding: 20px;
+    color: white;
+}
+
+/* Container for the intro section */
+.intro-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px; /* Adjust this value as needed */
+}
+
+.intro-title {
+    font-size: 3em;
+    line-height: 1;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column; /* Ensure "US" is below "ABOUT" */
+    align-items: center; /* Center align "US" under "ABOUT" */
+}
+
+.intro-title .about,
+.intro-title .us {
+    display: block;
+}
+
+.intro-title .us {
+    font-size: 0.8em;
+    margin-top: 0; /* Remove this if causing issues */
+}
+
+.intro-description {
+    font-size: 1.2em;
+    line-height: 1.6;
+    flex: 2;
+    margin-left: 20px;
+    text-align: left;
+}
+
+/* Centered container for the about sections */
+.centered-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px; /* Adjust this value as needed */
+}
+
+/* Flexbox layout for sections */
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    width: 100%;
+}
+
+.about-section.left .text-content {
+    order: 1;
+    text-align: left;
+    flex: 1;
+    padding-right: 20px;
+}
+
+.about-section.left .image-content {
+    order: 2;
+    flex: 1;
+}
+
+.about-section.right .text-content {
+    order: 2;
+    text-align: left;
+    flex: 1;
+    padding-left: 20px;
+}
+
+.about-section.right .image-content {
+    order: 1;
+    flex: 1;
+}
+
+.section-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.section-image {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 500px;
+}
+
+.section-description {
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .intro-container {
+        flex-direction: column;
+    }
+
+    .centered-container {
+        flex-direction: column;
+    }
+
+    .intro-title {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .intro-title .us {
+        margin-top: -10px;
+    }
+
+    .about-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-section.left .text-content,
+    .about-section.left .image-content,
+    .about-section.right .text-content,
+    .about-section.right .image-content {
+        order: 0;
+        padding: 0;
+    }
+
+    .about-section.left .text-content,
+    .about-section.right .text-content {
+        padding-bottom: 20px;
+    }
+
+    .section-image {
+        max-width: 100%;
+        max-height: 300px;
+    }
+}
+
+@media (min-width: 769px) {
+    .section-image {
+        max-width: 600px;
+        max-height: 500px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
