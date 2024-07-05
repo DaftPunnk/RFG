@@ -232,8 +232,8 @@ body, html {
     text-align: center;
     padding: 10px;
 }
-/* Add these styles to your App.css file */
 
+/* About page styling */
 .about-page-container {
     padding: 20px;
     color: white;
@@ -276,6 +276,7 @@ body, html {
     flex: 2;
     margin-left: 20px;
     text-align: left;
+    margin-bottom: 20px; /* Add this line for spacing between paragraphs */
 }
 
 /* Centered container for the about sections */

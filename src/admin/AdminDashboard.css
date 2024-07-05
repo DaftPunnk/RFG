@@ -1,0 +1,62 @@
+/* src/admin/AdminDashboard.css */
+
+.admin-dashboard {
+    color: white;
+    background-color: black;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .reservations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .reservation-item {
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #333;
+  }
+  
+  .edit-form, .reservation-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .select-input, .number-input {
+    padding: 10px;
+    font-size: 1rem;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .save-button, .cancel-button, .edit-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .save-button:hover, .cancel-button:hover, .edit-button:hover {
+    background-color: grey;
+  }
+  
+  .reservation-details p {
+    margin: 5px 0;
+  }
+  
+  

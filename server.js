@@ -83,9 +83,27 @@ app.get('/api/seat-availability/:date', (req, res) => {
     });
 });
 
+// Get all reservations
+app.get('/api/reservations', (req, res) => {
+    const query = `SELECT * FROM reservations`;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching reservations:', err);
+            res.status(500).send({ message: 'Error fetching reservations' });
+            return;
+        }
+        res.json(results); // Ensure JSON response
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
+
+
+
+
 
 
 
