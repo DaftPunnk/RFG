@@ -1,62 +1,90 @@
 /* src/admin/AdminDashboard.css */
 
 .admin-dashboard {
-    color: white;
-    background-color: black;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .reservations-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .reservation-item {
-    padding: 20px;
-    border: 1px solid white;
-    border-radius: 5px;
-    background-color: #333;
-  }
-  
-  .edit-form, .reservation-details {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .select-input, .number-input {
-    padding: 10px;
-    font-size: 1rem;
-    color: black;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .save-button, .cancel-button, .edit-button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    color: black;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .save-button:hover, .cancel-button:hover, .edit-button:hover {
-    background-color: grey;
-  }
-  
-  .reservation-details p {
-    margin: 5px 0;
-  }
+  color: white;
+  background-color: black;
+  padding: 20px;
+  padding-top: 80px; /* Add top padding to ensure content is not hidden behind navbar */
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.reservations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reservation-item {
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: #333;
+}
+
+.edit-form, .reservation-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.select-input, .number-input, .text-input, .date-picker {
+  padding: 10px;
+  font-size: 1rem;
+  color: black; /* Ensure text color is black */
+  background-color: white; /* Ensure background color is white */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 0.875rem;
+}
+
+.save-button, .cancel-button, .edit-button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: black;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.save-button:hover:not(:disabled), .cancel-button:hover, .edit-button:hover {
+  background-color: grey;
+}
+
+.reservation-details p {
+  margin: 5px 0;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.logout-button:hover {
+  background-color: darkred;
+}
+
+
   
   

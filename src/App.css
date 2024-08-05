@@ -5,30 +5,29 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Global settings */
+/* Ensure the entire background is black */
 body, html {
-    font-family: 'Suranna', serif;
+    
     width: 100%;
     min-height: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background: #000;
+    background: #000 !important;
     color: white;
 }
 
-/* Custom colors */
-.bg-gold {
-    --tw-bg-opacity: 1;
-    background-color: rgba(192, 163, 103, var(--tw-bg-opacity));
+.app-container {
+    
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #000;
 }
-.bg-gold-light {
-    --tw-bg-opacity: 1;
-    background-color: rgba(210, 180, 140, var(--tw-bg-opacity));
-}
-.border-gold {
-    --tw-border-opacity: 1;
-    border-color: rgba(192, 163, 103, var(--tw-border-opacity));
+
+.content {
+    flex: 1;
+    background: #000;
 }
 
 /* Hero section */
@@ -56,7 +55,7 @@ body, html {
 
 .contact-info {
     position: absolute;
-    bottom: 20px;
+    bottom: -100px;
 }
 
 /* Navbar styling */
@@ -192,45 +191,54 @@ body, html {
     justify-content: space-between;
     padding: 0 20px;
     width: 100%;
-    margin-top: -100px;
+    font-size: 1em;
+    text-align: center;
 }
 
-.left-section {
-    text-align: left;
+.left-section, .right-section {
     width: 50%;
-    font-size: 1.5em;
-}
-
-.right-section {
-    text-align: right;
-    width: 50%;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .get-in-touch {
     font-size: 1.5em;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.contact-us {
-    font-size: 1.2em;
-    margin-top: -10px;
-}
-
-.contact-info p {
+.contact-info p, .reservation-link {
     margin: 10px 0;
     display: block;
+    color: white;
 }
 
 .contact-icon {
     margin-right: 10px;
-    font-size: 1.5em;
+    font-size: 1em;
+}
+
+.reservation-link {
+    color: white;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .contact-details-section {
+        flex-direction: column;
+    }
+
+    .left-section, .right-section {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 .footer {
+    
     width: 100%;
     text-align: center;
     padding: 10px;
+    background: #000;
 }
 
 /* About page styling */
@@ -256,19 +264,26 @@ body, html {
     line-height: 1;
     margin-right: 20px;
     display: flex;
-    flex-direction: column; /* Ensure "US" is below "ABOUT" */
+    flex-direction: column;
     align-items: center; /* Center align "US" under "ABOUT" */
+    position: relative;
 }
 
-.intro-title .about,
-.intro-title .us {
+.intro-title .about {
     display: block;
+}
+
+.us-container {
+    position: relative;
+    left: 30px; /* Increase this value to move "US" further to the right */
+    top: -10px; /* Decrease this value to reduce the gap between "ABOUT" and "US" */
 }
 
 .intro-title .us {
     font-size: 0.8em;
-    margin-top: 0; /* Remove this if causing issues */
 }
+
+
 
 .intro-description {
     font-size: 1.2em;
@@ -390,6 +405,7 @@ body, html {
         max-height: 500px;
     }
 }
+
 
 
 

@@ -28,10 +28,12 @@ function MealSelectionForm({ nextStep }) {
             Lunch
           </button>
           <button
-            className={`py-3 px-6 rounded ${
+            className={`py-3 px-6 rounded bg-gray-500 text-gray-700 border border-gray-700 cursor-not-allowed`}
+            disabled
+            /* className={`py-3 px-6 rounded ${
               selectedMeal === 'dinner' ? 'bg-white text-black' : 'bg-black text-white border border-white'
             }`}
-            onClick={() => handleMealSelection('dinner')}
+            onClick={() => handleMealSelection('dinner')} */
           >
             Dinner
           </button>

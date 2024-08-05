@@ -3,7 +3,7 @@ import { useReservation } from './ReservationContext';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
-import './custom-datepicker.css';  // 保留当前的样式
+import './custom-datepicker.css';
 import moment from 'moment';
 
 function TimeDateSelectionForm({ nextStep, prevStep }) {
@@ -13,7 +13,7 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
   const [seatAvailability, setSeatAvailability] = useState({});
   const [errors, setErrors] = useState({});
   const [fullyBooked, setFullyBooked] = useState(false);
-  const [maxGuests, setMaxGuests] = useState(8); // 新增状态来设置最大人数
+  const [maxGuests, setMaxGuests] = useState(8);
   const [showAvailability, setShowAvailability] = useState(null);
 
   useEffect(() => {
@@ -25,14 +25,12 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
         const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
         const response = await axios.get(`http://localhost:3001/api/seat-availability/${formattedDate}`);
         setSeatAvailability(response.data);
-        // Check if all time slots are fully booked
         const allFull = times.every(time => response.data[time] === 0);
         setFullyBooked(allFull);
-        // 设置最大人数为初始值
         if (response.data[reservation.time] !== undefined) {
-          setMaxGuests(response.data[reservation.time]); // 根据当前选择的时间段设置最大人数
+          setMaxGuests(response.data[reservation.time]);
         } else {
-          setMaxGuests(8); // 重置最大人数为初始值
+          setMaxGuests(8);
         }
       } catch (error) {
         console.error('Error fetching seat availability:', error);
@@ -48,19 +46,19 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
     setSelectedTime(time);
     updateReservation({ ...reservation, time: time });
     setErrors((prevErrors) => ({ ...prevErrors, time: '' }));
-    setShowAvailability(time); // 只显示选中的时间段
+    setShowAvailability(time);
     if (seatAvailability[time] !== undefined) {
       setMaxGuests(seatAvailability[time]);
       if (reservation.guests > seatAvailability[time]) {
-        updateReservation({ ...reservation, guests: seatAvailability[time] }); // 如果当前人数超过最大值，调整人数
+        updateReservation({ ...reservation, guests: seatAvailability[time] });
       }
     } else {
-      setMaxGuests(8); // 重置最大人数为初始值
+      setMaxGuests(8);
     }
   };
 
   const handleDateChange = (date) => {
-    updateReservation({ ...reservation, date, guests: 1 }); // 选择新日期时，将人数重置为1
+    updateReservation({ ...reservation, date, guests: 1 });
     setErrors((prevErrors) => ({ ...prevErrors, date: '' }));
   };
 
@@ -69,6 +67,10 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
       updateReservation({ ...reservation, guests: amount });
       setErrors((prevErrors) => ({ ...prevErrors, guests: '' }));
     }
+  };
+
+  const handleNoteChange = (event) => {
+    updateReservation({ ...reservation, note: event.target.value });
   };
 
   const handleSubmit = () => {
@@ -147,6 +149,12 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
           </button>
         </div>
         {errors.guests && <div className="text-red-500 text-sm mb-2">{errors.guests}</div>}
+        <textarea
+          className="w-full p-2 mt-4 text-black"
+          placeholder="Add a note (e.g., Birthday celebration, Food allergies)"
+          value={reservation.note}
+          onChange={handleNoteChange}
+        ></textarea>
         <div className="flex items-center justify-center mt-4 space-x-4">
           <button
             className="bg-black text-white border border-white hover:bg-gray-800 font-bold py-3 px-6 rounded"
@@ -168,6 +176,7 @@ function TimeDateSelectionForm({ nextStep, prevStep }) {
 }
 
 export default TimeDateSelectionForm;
+
 
 
 

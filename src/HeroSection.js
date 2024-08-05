@@ -10,11 +10,11 @@ const HeroSection = () => {
             <h1 className="welcome-text">Welcome to Our Restaurant</h1>
             <div className="contact-info">
                 <p>1/333 Parnell Road, Parnell, Auckland 1052</p>
-                <p>021-1082668</p>
+                <p>021 108 2668</p>
                 <p>DINING@RFG.NZ</p>
                 <a href="https://www.instagram.com/rfgrestaurant/" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faInstagram} className="instagram-icon" />
-                    Instagram: rfgrestaurant
+                <FontAwesomeIcon icon={faInstagram} className="instagram-icon" />{' '}
+                      rfgrestaurant
                 </a>
             </div>
         </div>

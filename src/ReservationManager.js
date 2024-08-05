@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
+import TermsAndConditions from './TermsAndConditions';
 import MealSelectionForm from './MealSelectionForm';
 import TimeDateSelectionForm from './TimeDateSelectionForm';
 import UserDetailsForm from './UserDetailsForm';
@@ -41,17 +42,19 @@ function ReservationManager() {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <MealSelectionForm nextStep={nextStep} />;
+        return <TermsAndConditions nextStep={nextStep} />;
       case 2:
-        return <TimeDateSelectionForm nextStep={nextStep} prevStep={prevStep} />;
+        return <MealSelectionForm nextStep={nextStep} />;
       case 3:
-        return <UserDetailsForm nextStep={nextStep} prevStep={prevStep} />;
+        return <TimeDateSelectionForm nextStep={nextStep} prevStep={prevStep} />;
       case 4:
-        return <SummaryForm prevStep={prevStep} nextStep={nextStep} />;
+        return <UserDetailsForm nextStep={nextStep} prevStep={prevStep} />;
       case 5:
+        return <SummaryForm prevStep={prevStep} nextStep={nextStep} />;
+      case 6:
         return <ThankYou />;
       default:
-        return <MealSelectionForm nextStep={nextStep} />;
+        return <TermsAndConditions nextStep={nextStep} />;
     }
   };
 
@@ -63,6 +66,7 @@ function ReservationManager() {
 }
 
 export default ReservationManager;
+
 
 
 

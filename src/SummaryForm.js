@@ -31,6 +31,7 @@ function SummaryForm({ prevStep }) {
           <li><strong>Name:</strong> {reservation.name}</li>
           <li><strong>Phone:</strong> {reservation.phone}</li>
           <li><strong>Email:</strong> {reservation.email}</li>
+          <li><strong>Note:</strong> {reservation.note}</li> {/* Add this line */}
         </ul>
         {errors.confirm && <div className="text-red-500 text-sm mb-2">{errors.confirm}</div>}
         <div className="flex items-center justify-center mt-4 space-x-4">
@@ -53,6 +54,7 @@ function SummaryForm({ prevStep }) {
 }
 
 export default SummaryForm;
+
 
 
 

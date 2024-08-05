@@ -15,24 +15,29 @@ import './App.css';
 function App() {
   return (
     <ReservationProvider>
-                    <NavBar />
-                    <Footer />
-
-      <Routes>
-        <Route path="/admin/*" element={<AdminApp />} />
-        <Route path="/" element={<HeroSection />} />
-        <Route path="/menu" element={<MenuPage />} />
-        <Route path="/reservation" element={<ReservationManager />} />
-        <Route path="/contact" element={<ContactInfo />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="*" element={<Navigate replace to="/" />} />
-      </Routes>
+      <div className="app-container">
+        <NavBar />
+        <div className="content">
+          <Routes>
+            <Route path="/admin/*" element={<AdminApp />} />
+            <Route path="/" element={<HeroSection />} />
+            <Route path="/menu" element={<MenuPage />} />
+            <Route path="/reservation" element={<ReservationManager />} />
+            <Route path="/contact" element={<ContactInfo />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </ReservationProvider>
   );
 }
 
 export default App;
+
+
 
 
 

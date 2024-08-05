@@ -14,7 +14,8 @@ export const ReservationProvider = ({ children }) => {
     guests: 1,
     name: '',
     phone: '',
-    email: ''
+    email: '',
+    note: ''  // Add note here
   });
 
   const updateReservation = useCallback((newReservation) => {
@@ -27,4 +28,5 @@ export const ReservationProvider = ({ children }) => {
     </ReservationContext.Provider>
   );
 };
+
 
